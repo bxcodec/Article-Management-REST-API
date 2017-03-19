@@ -38,7 +38,7 @@ Run your project using this command
 ```bash
 # download the project into $GOPATH/src
 git clone https://github.com/bxcodec/Article-Management-REST-API.git
-cd backend-iman
+cd path_of_the_project
 
 # import the query.sql to your mysql server
 mysql -u username -p db_name < query.sql
