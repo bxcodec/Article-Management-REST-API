@@ -9,6 +9,7 @@ import (
 	"articles/services/mysql"
 	"articles/routers/v1"
 	"articles/core/models"
+	"articles/middlewares/cors"
 
 
 
@@ -20,6 +21,7 @@ var router  *gin.Engine;
 func init() {
 	mysql.CheckDB()
 	router = gin.New();
+	router.Use(cors.CORSMiddleware())
 	router.NoRoute(noRouteHandler())
 	version1:=router.Group("/v1")
 	v1.InitRoutes(version1)
