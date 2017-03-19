@@ -1,0 +1,9 @@
+{
+  "name": "Articles API",
+  "version": "1.0.0",
+  "description": "Article API for serve you better",
+  "template": {
+    "forceLanguage": "en"
+  },
+  "url" : "http://localhost:9090"
+}

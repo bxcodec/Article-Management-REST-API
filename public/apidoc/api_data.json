@@ -1,0 +1,382 @@
+[
+  {
+    "type": "delete",
+    "url": "/v1/articles/:id",
+    "title": "Delete an Article",
+    "description": "<p>Hard Delete an Article</p>",
+    "group": "Articles",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Interger",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id of the article</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -XDELETE localhost:9090/v1/articles/5",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"data\": null,\n  \"endpoint\": \"/v1/articles/6\",\n  \"errors\": null,\n  \"message\": \"Succesfully Deleted\",\n  \"method\": \"DELETE\",\n  \"statuscode\": 200,\n  \"timestamp\": \"2017-03-17 09:29:21\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routers/v1/article_r.go",
+    "groupTitle": "Articles",
+    "name": "DeleteV1ArticlesId",
+    "error": {
+      "fields": {
+        "Error 4xxx": [
+          {
+            "group": "Error 4xxx",
+            "type": "4001",
+            "optional": false,
+            "field": "BadRequest",
+            "description": "<p>Some required parameter is invalid.</p>"
+          }
+        ],
+        "Error 5xxx": [
+          {
+            "group": "Error 5xxx",
+            "type": "5001",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something wrong with our services</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/v1/articles",
+    "title": "Get Many",
+    "description": "<p>Used for get many article (max = 10 in one page) <br> Able to querying with title of the articles</p>",
+    "group": "Articles",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "q",
+            "description": "<p>Input query for title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "p",
+            "description": "<p>Page of the content</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -XGET http://localhost:9090/v1/articles\ncurl -XGET http://localhost:9090/v1/articles?p=2\ncurl -XGET http://localhost:9090/v1/articles?q=makan\ncurl -XGET http://localhost:9090/v1/articles?q=makan&p=1",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"data\": {\n    \"thumb_url\": \"http://localhost:9090/v1/images/\",\n    \"total\": 10,\n    \"articles\": [\n      {\n        \"id_articles\": 1,\n        \"title\": \"Kala Senja Sejuk\",\n        \"content\": \"Ketika malam tiba ,saya menangis\",\n        \"thumbnail\": \"thumb.png\",\n        \"created_at\": null,\n        \"updated_at\": null\n      },\n      {\n        \"id_articles\": 2,\n        \"title\": \"Hello Adik Adik\",\n        \"content\": \"Makan kue enak sekali\",\n        \"thumbnail\": \"\",\n        \"created_at\": \"2017-03-16T15:30:20Z\",\n        \"updated_at\": \"2017-03-16T15:30:20Z\"\n      },\n     //... \n    ]\n  },\n  \"endpoint\": \"/v1/articles\",\n  \"errors\": null,\n  \"message\": \"Get The Articles\",\n  \"method\": \"GET\",\n  \"statuscode\": 200,\n  \"timestamp\": \"2017-03-17 08:13:17\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routers/v1/article_r.go",
+    "groupTitle": "Articles",
+    "name": "GetV1Articles",
+    "error": {
+      "fields": {
+        "Error 4xxx": [
+          {
+            "group": "Error 4xxx",
+            "type": "4001",
+            "optional": false,
+            "field": "BadRequest",
+            "description": "<p>Some required parameter is invalid.</p>"
+          }
+        ],
+        "Error 5xxx": [
+          {
+            "group": "Error 5xxx",
+            "type": "5001",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something wrong with our services</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/v1/articles/:id",
+    "title": "Get One",
+    "description": "<p>Get One Article</p>",
+    "group": "Articles",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id Of the Article</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -XGET localhost:9090/v1/articles/1",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"data\": {\n    \"thumb_url\": \"http://localhost:9090/v1/images/\",\n    \"article\": {\n      \"id_articles\": 1,\n      \"title\": \"Kala Senja Sejuk\",\n      \"content\": \"Ketika malam tiba ,saya menangis\",\n      \"thumbnail\": \"thumb.png\",\n      \"created_at\": null,\n      \"updated_at\": null\n    }\n  },\n  \"endpoint\": \"/v1/articles/1\",\n  \"errors\": null,\n  \"message\": \"Succesfully Retrieved\",\n  \"method\": \"GET\",\n  \"statuscode\": 200,\n  \"timestamp\": \"2017-03-17 09:25:04\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routers/v1/article_r.go",
+    "groupTitle": "Articles",
+    "name": "GetV1ArticlesId",
+    "error": {
+      "fields": {
+        "Error 4xxx": [
+          {
+            "group": "Error 4xxx",
+            "type": "4001",
+            "optional": false,
+            "field": "BadRequest",
+            "description": "<p>Some required parameter is invalid.</p>"
+          }
+        ],
+        "Error 5xxx": [
+          {
+            "group": "Error 5xxx",
+            "type": "5001",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something wrong with our services</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "post",
+    "url": "/v1/articles",
+    "title": "Create Article",
+    "description": "<p>Create an Article</p>",
+    "group": "Articles",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>The title of the Article</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "content",
+            "description": "<p>The content of the Article</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "multipart/form-data",
+            "optional": false,
+            "field": "image",
+            "description": "<p>The thumbnail of the Article</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -XPOST -F \"title=Makan Kue Yang Enak\"   -F \"content=Hello Dunia Indah\"  -F \"image=@/home/ww3/Pictures/oke.png\" http://localhost:9090/v1/articles",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"data\": null,\n  \"endpoint\": \"/v1/articles\",\n  \"errors\": null,\n  \"message\": \"Article Created Succesfully\",\n  \"method\": \"POST\",\n  \"statuscode\": 201,\n  \"timestamp\": \"2017-03-17 09:20:10\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routers/v1/article_r.go",
+    "groupTitle": "Articles",
+    "name": "PostV1Articles",
+    "error": {
+      "fields": {
+        "Error 4xxx": [
+          {
+            "group": "Error 4xxx",
+            "type": "4001",
+            "optional": false,
+            "field": "BadRequest",
+            "description": "<p>Some required parameter is invalid.</p>"
+          }
+        ],
+        "Error 5xxx": [
+          {
+            "group": "Error 5xxx",
+            "type": "5001",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something wrong with our services</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "put",
+    "url": "/v1/articles/:id",
+    "title": "Update Article",
+    "description": "<p>Update an Article</p>",
+    "group": "Articles",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id Of The Article</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>The title of the Article</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "content",
+            "description": "<p>The content of the Article</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "multipart/form-data",
+            "optional": false,
+            "field": "image",
+            "description": "<p>The thumbnail of the Article</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -XPUT -F \"title=Makan Kue Yang Enak\"   -F \"content=Hello Dunia Indah\"  -F \"image=@/home/ww3/Pictures/oke.png\" http://localhost:9090/v1/articles/7",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"data\": null,\n  \"endpoint\": \"/v1/articles/7\",\n  \"errors\": null,\n  \"message\": \"Article Updated Succesfully\",\n  \"method\": \"PUT\",\n  \"statuscode\": 200,\n  \"timestamp\": \"2017-03-17 09:30:14\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routers/v1/article_r.go",
+    "groupTitle": "Articles",
+    "name": "PutV1ArticlesId",
+    "error": {
+      "fields": {
+        "Error 4xxx": [
+          {
+            "group": "Error 4xxx",
+            "type": "4001",
+            "optional": false,
+            "field": "BadRequest",
+            "description": "<p>Some required parameter is invalid.</p>"
+          }
+        ],
+        "Error 5xxx": [
+          {
+            "group": "Error 5xxx",
+            "type": "5001",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something wrong with our services</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "./public/apidoc/main.js",
+    "group": "_home_ww3_gocode_src_articles_public_apidoc_main_js",
+    "groupTitle": "_home_ww3_gocode_src_articles_public_apidoc_main_js",
+    "name": ""
+  }
+]

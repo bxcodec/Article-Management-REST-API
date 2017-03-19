@@ -1,0 +1,9 @@
+blacklist=["migrations", "other"]
+schema="iman_db"
+[mysql]
+dbname="iman_db"
+host="localhost"
+port=3306
+user="root"
+pass="15pstr"
+sslmode="false"
